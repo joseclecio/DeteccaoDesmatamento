@@ -4,7 +4,6 @@ import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
 
-
 while True:
     i = 0
     j = 0
@@ -43,10 +42,12 @@ while True:
         print("Exemplo: imagem-2.jpg ")
         read2 = input("Nome da imagem: ")
 
+        # seleção de imagem a partir da digitação no terminal
         imagem2 = cv2.imread(read2)
         altura2 = imagem2.shape[0]
         largura2 = imagem2.shape[1]
 
+        # opção manual para escolher a dimensão da imagem (ultimo caso)
         # dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
         # imagem1 = cv2.resize(imagem1, dim, interpolation=cv2.INTER_AREA)
         # imagem2 = cv2.resize(imagem2, dim, interpolation=cv2.INTER_AREA)
@@ -133,5 +134,3 @@ while True:
 
     else:
         print("Opção inserida é invalida, tente novamente!")
-
-
