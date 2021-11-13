@@ -67,6 +67,7 @@ for c in contornos:
         cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
 
 print("tons de diferença na imagem = ", numeroDiferencas) # impressão no console
+print(diferenca)
 
 # impressões das janelas
 cv2.imshow("imagem1", imagem1)
