@@ -3,8 +3,8 @@ import numpy as np
 from skimage.metrics import structural_similarity
 
 # carrega as imagens a serem comparadas
-imagem1 = cv2.imread("mapa1.png")
-imagem2 = cv2.imread("mapa2.png")
+imagem1 = cv2.imread("img_1.png")
+imagem2 = cv2.imread("img_2.png")
 
 #dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
 #imagem1 = cv2.resize(imagem1, dim, interpolation=cv2.INTER_AREA)
@@ -20,7 +20,7 @@ depois_do_cinza = cv2.cvtColor(imagem2, cv2.COLOR_BGR2GRAY)
 # A pontuação representa o índice de similaridade estrutural entre as duas imagens de entrada.
 # Este valor pode cair no intervalo [-1, 1] com um valor de um sendo uma “correspondência perfeita”.
 (pontuacao, diferenca) = structural_similarity(antes_do_cinza, depois_do_cinza, full=True)
-print("Semelhança de imagem", pontuacao)
+print("Semelhança de imagem", pontuacao) #impressão no console
 
 # A diferença image contém as diferenças reais da imagem entre as duas imagens de entrada que desejamos visualizar.
 # A imagem de diferença é atualmente representada como um tipo de dados de ponto flutuante no intervalo [0, 1], portanto,
@@ -47,12 +47,14 @@ preenchido_depois = imagem2.copy() #copia a imagem para outro objeto de imagem, 
 # no for abaixo obtem-se a volta sobre os contornos onde,
 # calcula a caixa delimitadora do contorno e, em seguida, desenha a
 # caixa delimitadora em ambas as imagens de entrada para representar onde as duas imagens são diferentes
+numeroDiferencas = 0 # declaração de variavel para achar o número de diferenças na image,
+
 for c in contornos:
 
     # proporção entre a área do contorno e a área do retângulo delimitador
     area = cv2.contourArea(c)
     if area > 40:
-
+        numeroDiferencas += 1
         # proporção entre a largura e a altura do retângulo delimitador do objeto
         x, y, w, h = cv2.boundingRect(c)
 
@@ -63,6 +65,8 @@ for c in contornos:
         # valores para desenhar a mascara verde em cada imagem com
         cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
         cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
+
+print("tons de diferença na imagem = ", numeroDiferencas) # impressão no console
 
 # impressões das janelas
 cv2.imshow("imagem1", imagem1)
