@@ -20,7 +20,6 @@ depois_do_cinza = cv2.cvtColor(imagem2, cv2.COLOR_BGR2GRAY)
 # A pontuação representa o índice de similaridade estrutural entre as duas imagens de entrada.
 # Este valor pode cair no intervalo [-1, 1] com um valor de um sendo uma “correspondência perfeita”.
 (pontuacao, diferenca) = structural_similarity(antes_do_cinza, depois_do_cinza, full=True)
-print("Semelhança de imagem", pontuacao) #impressão no console
 
 # A diferença image contém as diferenças reais da imagem entre as duas imagens de entrada que desejamos visualizar.
 # A imagem de diferença é atualmente representada como um tipo de dados de ponto flutuante no intervalo [0, 1], portanto,
@@ -66,12 +65,16 @@ for c in contornos:
         cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
         cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
 
-print("tons de diferença na imagem = ", numeroDiferencas) # impressão no console
+print("------------------INFORMAÇÕES------------------")
+print("Semelhança de imagem", pontuacao) #impressão no console
+print("Tons de diferença na imagem = ", numeroDiferencas) # impressão no console
+print("Tamanho da imagem: ",imagem1.shape) #mostra informações a respeito da dimensão da imagem1
+print("Tamanho da imagem: ",imagem2.shape) #mostra informações a respeito da dimensão da imagem2
 
 # impressões das janelas
-cv2.imshow("imagem1", imagem1)
+#cv2.imshow("imagem1", imagem1)
 cv2.imshow("imagem2", imagem2)
-cv2.imshow("diferenca", diferenca)
-cv2.imshow("mascara", mascara)
-cv2.imshow("preenchido imagem2", preenchido_depois)
+#cv2.imshow("diferenca", diferenca)
+#cv2.imshow("mascara", mascara)
+#cv2.imshow("preenchido imagem2", preenchido_depois)
 cv2.waitKey(0)
