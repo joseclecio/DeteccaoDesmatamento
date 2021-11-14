@@ -45,8 +45,9 @@ while True:
         largura2 = imagem2.shape[1]
 
         # defini aqui para deixar a resolução da imagem padrão ao ser exibida na tela após os processamento
-        imagem1 = cv2.resize(imagem1, (1500, 900)) # alturaxlargura
-        imagem2 = cv2.resize(imagem2, (1500, 900)) # alturaxlargura
+        # independente do tamanho delas, será exibida como padrão 1500x900
+        imagem1 = cv2.resize(imagem1, (1500, 900))  # alturaxlargura
+        imagem2 = cv2.resize(imagem2, (1500, 900))  # alturaxlargura
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
         # dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
