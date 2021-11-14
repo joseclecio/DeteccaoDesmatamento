@@ -50,7 +50,7 @@ while True:
         imagem1 = cv2.resize(imagem1, (700, 500))  # larguraxaltura
         imagem2 = cv2.resize(imagem2, (700, 500))  # larguraxaltura
 
-        img_height = imagem1.shape[0] #shape retorna as dimensçoes da matriz
+        img_height = imagem1.shape[0]  # shape retorna as dimensçoes da matriz
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
         # dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
@@ -122,7 +122,7 @@ while True:
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if (resposta == "S" or resposta == "s"):
             x = np.zeros((img_height, 10, 3), np.uint8)
-            result = np.hstack((imagem1, x, imagem2))
+            result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
 
             # impressões das janelas
             # cv2.imshow("imagem1", imagem1)
