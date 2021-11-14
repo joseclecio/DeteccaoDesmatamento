@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
 
+# interface para facil manuseio da apçicação
 while True:
     print("""
 		+--------------------------------------+
@@ -46,8 +47,10 @@ while True:
 
         # defini aqui para deixar a resolução da imagem padrão ao ser exibida na tela após os processamento
         # independente do tamanho delas, será exibida como padrão 1500x900
-        imagem1 = cv2.resize(imagem1, (1500, 900))  # alturaxlargura
-        imagem2 = cv2.resize(imagem2, (1500, 900))  # alturaxlargura
+        imagem1 = cv2.resize(imagem1, (700, 500))  # larguraxaltura
+        imagem2 = cv2.resize(imagem2, (700, 500))  # larguraxaltura
+
+        img_height = imagem1.shape[0] #shape retorna as dimensçoes da matriz
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
         # dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
@@ -118,14 +121,18 @@ while True:
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if (resposta == "S" or resposta == "s"):
+            x = np.zeros((img_height, 10, 3), np.uint8)
+            result = np.hstack((imagem1, x, imagem2))
+
             # impressões das janelas
             # cv2.imshow("imagem1", imagem1)
-            cv2.imshow("imagem2", imagem2)
+            # cv2.imshow("imagem2", imagem2)
+            cv2.imshow("Diferencas", result)  # diferenças lado a lado
             # cv2.imshow("diferenca", diferenca)
             # cv2.imshow("mascara", mascara)
             # cv2.imshow("preenchido imagem2", preenchido_depois)
             cv2.waitKey(0)
-
+            cv2.destroyAllWindows()  # função para destruir as janelas
             print("Digite qualquer tecla para fechar.")
 
     elif (
