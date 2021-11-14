@@ -5,9 +5,6 @@ import numpy as np
 from skimage.metrics import structural_similarity
 
 while True:
-    i = 0
-    j = 0
-    x = 0
     print("""
 		+--------------------------------------+
 		|         Selecione uma Opção          |
@@ -46,6 +43,10 @@ while True:
         imagem2 = cv2.imread(read2)
         altura2 = imagem2.shape[0]
         largura2 = imagem2.shape[1]
+
+        # defini aqui para deixar a resolução da imagem padrão ao ser exibida na tela após os processamento
+        imagem1 = cv2.resize(imagem1, (1500, 900)) # alturaxlargura
+        imagem2 = cv2.resize(imagem2, (1500, 900)) # alturaxlargura
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
         # dim = (500, 500) #aqui eu posso definir a dimensão da imagem a partir da própria
