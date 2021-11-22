@@ -120,7 +120,7 @@ while True:
         print("------------------------------------\n")
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
-        if (resposta == "S" or resposta == "s"):
+        if resposta == "S" or resposta == "s":
             x = np.zeros((img_height, 10, 3), np.uint8)
             result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
 
