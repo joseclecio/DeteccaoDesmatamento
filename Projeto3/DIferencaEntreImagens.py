@@ -106,7 +106,7 @@ while True:
 
                 # valores para desenhar um retângulo verde em cada imagem com
                 cv2.rectangle(imagem1, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                cv2.rectangle(imagem2, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                #cv2.rectangle(imagem2, (x, y), (x + w, y + h), (0, 0, 255), 2) #ocultei aqui para mostrar as diferenças entre ambas as imegens juntas no mesmo quadro
 
                 # valores para desenhar a mascara verde em cada imagem com
                 cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
@@ -125,9 +125,9 @@ while True:
             result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
 
             # impressões das janelas
-            cv2.imshow("imagem1", imagem1)
+            # cv2.imshow("imagem1", imagem1)
             # cv2.imshow("imagem2", imagem2)
-            # cv2.imshow("Diferencas", result)  # diferenças lado a lado
+            cv2.imshow("Diferencas", result)  # diferenças lado a lado
             # cv2.imshow("diferenca", diferenca)
             # cv2.imshow("mascara", mascara)
             # cv2.imshow("preenchido imagem2", preenchido_depois)
