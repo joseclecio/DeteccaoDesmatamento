@@ -50,7 +50,6 @@ while True:
         # imagem1 = cv2.resize(imagem1, (700, 500))  # larguraxaltura
         # imagem2 = cv2.resize(imagem2, (700, 500))  # larguraxaltura
 
-
         img_height = imagem1.shape[0]  # shape retorna as dimensçoes da matriz
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
@@ -106,8 +105,8 @@ while True:
                 x, y, w, h = cv2.boundingRect(c)
 
                 # valores para desenhar um retângulo verde em cada imagem com
-                cv2.rectangle(imagem1, (x, y), (x + w, y + h), (36, 255, 12), 2)
-                cv2.rectangle(imagem2, (x, y), (x + w, y + h), (36, 255, 12), 2)
+                cv2.rectangle(imagem1, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                cv2.rectangle(imagem2, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
                 # valores para desenhar a mascara verde em cada imagem com
                 cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
@@ -122,7 +121,7 @@ while True:
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if resposta == "S" or resposta == "s":
-            x = np.zeros((img_height, 10, 3), np.uint8)
+            x = np.zeros((img_height, 10, 3), np.uint8) # faz com que mostre a imagem lado a lado
             result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
 
             # impressões das janelas
