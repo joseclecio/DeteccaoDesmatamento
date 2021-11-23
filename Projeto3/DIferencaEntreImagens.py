@@ -50,6 +50,7 @@ while True:
         # imagem1 = cv2.resize(imagem1, (700, 500))  # larguraxaltura
         # imagem2 = cv2.resize(imagem2, (700, 500))  # larguraxaltura
 
+
         img_height = imagem1.shape[0]  # shape retorna as dimensçoes da matriz
 
         # opção manual para escolher a dimensão da imagem (ultimo caso)
