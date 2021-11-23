@@ -126,9 +126,9 @@ while True:
             result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
 
             # impressões das janelas
-            # cv2.imshow("imagem1", imagem1)
+            cv2.imshow("imagem1", imagem1)
             # cv2.imshow("imagem2", imagem2)
-            cv2.imshow("Diferencas", result)  # diferenças lado a lado
+            # cv2.imshow("Diferencas", result)  # diferenças lado a lado
             # cv2.imshow("diferenca", diferenca)
             # cv2.imshow("mascara", mascara)
             # cv2.imshow("preenchido imagem2", preenchido_depois)
