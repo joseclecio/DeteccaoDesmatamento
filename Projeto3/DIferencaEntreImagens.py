@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
 
-# interface para facil manuseio da apçicação
+# interface para facil manuseio da aplicação
 while True:
     print("""
 		+--------------------------------------+
