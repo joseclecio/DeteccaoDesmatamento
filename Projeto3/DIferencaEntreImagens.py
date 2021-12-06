@@ -26,19 +26,19 @@ while True:
         print(" ")
         print("ATENÇÃO: AS IMAGENS DEVEM CONTER O MESMO TAMANHO.")
         print("EXEMPLO: 600x600 & 600x600")
+
+        # carrega as imagens a serem comparadas
         print(" ")
         print("Digite o nome e a extensão da primeira imagem que deseja abrir para sobrepor.")
         print("Exemplo: imagem-1.jpg ")
-
-        # carrega as imagens a serem comparadas
         read = input("Nome da imagem: ")
         imagem1 = cv2.imread(read)
-        imagem2 = cv2.imread(read)  # seta tipo de váriavel (a imagem não é utilizada)
 
         print(" ")
         print("Agora digite o nome e a extensão da imagem a ser sobreposta.")
         print("Exemplo: imagem-2.jpg ")
         read2 = input("Nome da imagem: ")
+        imagem2 = cv2.imread(read)  # seta tipo de váriavel (a imagem não é utilizada)
 
         # seleção de imagem a partir da digitação no terminal
         imagem2 = cv2.imread(read2)
