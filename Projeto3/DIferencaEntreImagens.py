@@ -115,8 +115,8 @@ while True:
         print("\n------------------INFORMAÇÕES------------------")
         print("Semelhança de imagem", pontuacao)  # impressão no console
         print("Tons de diferença na imagem = ", numeroDiferencas)  # impressão no console
-        print("Tamanho da imagem: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
-        print("Tamanho da imagem: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
+        print("Tamanho da imagem1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
+        print("Tamanho da imagem2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
         print("------------------------------------\n")
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
