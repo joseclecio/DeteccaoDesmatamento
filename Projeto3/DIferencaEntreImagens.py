@@ -42,8 +42,6 @@ while True:
 
         # seleção de imagem a partir da digitação no terminal
         imagem2 = cv2.imread(read2)
-        altura2 = imagem2.shape[0]
-        largura2 = imagem2.shape[1]
 
         # defini aqui para deixar a resolução da imagem padrão ao ser exibida na tela após os processamento
         # independente do tamanho delas, será exibida como padrão 1500x900
@@ -106,14 +104,14 @@ while True:
 
                 # valores para desenhar um retângulo verde em cada imagem com
                 cv2.rectangle(imagem1, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                #cv2.rectangle(imagem2, (x, y), (x + w, y + h), (0, 0, 255), 2) #ocultei aqui para mostrar as diferenças entre ambas as imegens juntas no mesmo quadro
+                # cv2.rectangle(imagem2, (x, y), (x + w, y + h), (0, 0, 255), 2) #ocultei aqui para mostrar as diferenças entre ambas as imegens juntas no mesmo quadro
 
                 # valores para desenhar a mascara verde em cada imagem com
                 cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
                 cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
 
         print("\n------------------INFORMAÇÕES------------------")
-        print("Semelhança de imagem", pontuacao)  # impressão no console
+        print("Semelhança de imagem", pontuacao)  # impressão no console da semelhança da imagem
         print("Tons de diferença na imagem = ", numeroDiferencas)  # impressão no console
         print("Tamanho da imagem1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
         print("Tamanho da imagem2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
@@ -121,8 +119,9 @@ while True:
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if resposta == "S" or resposta == "s":
-            x = np.zeros((img_height, 10, 3), np.uint8) # faz com que mostre a imagem lado a lado
+            x = np.zeros((img_height, 10, 3), np.uint8)  # faz com que mostre a imagem lado a lado
             result = np.hstack((imagem1, x, imagem2))  # Empilha matrizes em sequência horizontalmente
+            result = cv2.resize(result, (2200, 800))  # redimensionamento das imegens
 
             # impressões das janelas
             # cv2.imshow("imagem1", imagem1)
