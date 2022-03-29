@@ -3,9 +3,17 @@ import sys
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
+from matplotlib import pyplot as plt
+import pyttsx3
 
 # interface para facil manuseio da aplicação
 while True:
+    s = pyttsx3.init()
+    data="Selecione uma Opção",\
+    "Pressione 1 para Escolher Imagem ou 2 para Sair do programa"
+    s.say(data)
+    s.runAndWait()
+
     print("""
 		+--------------------------------------+
 		|         Selecione uma Opção          |
@@ -23,6 +31,12 @@ while True:
 
     if (
             opcao == 1):  ###############################################################################################################################
+
+        s = pyttsx3.init()
+        data = "Você selecionou a opção 1, escolha a primeira imagem para ser comparada"
+        s.say(data)
+        s.runAndWait()
+
         print(" ")
         print("ATENÇÃO: AS IMAGENS DEVEM CONTER O MESMO TAMANHO.")
         print("EXEMPLO: 600x600 & 600x600")
@@ -33,6 +47,11 @@ while True:
         print("Exemplo: imagem-1.jpg ")
         read = input("Nome da imagem: ")
         imagem1 = cv2.imread(read)
+
+        s = pyttsx3.init()
+        data = "Agora escolha a segunda imagem para ser comparada"
+        s.say(data)
+        s.runAndWait()
 
         print(" ")
         print("Agora digite o nome e a extensão da imagem a ser sobreposta.")
@@ -110,12 +129,27 @@ while True:
                 cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
                 cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
 
+
         print("\n------------------INFORMAÇÕES------------------")
         print("Semelhança de imagem", pontuacao)  # impressão no console da semelhança da imagem
-        print("Tons de diferença na imagem = ", numeroDiferencas)  # impressão no console
-        print("Tamanho da imagem1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
-        print("Tamanho da imagem2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
+        print("Número de diferenças encontrados = ", numeroDiferencas)  # impressão no console
+        print("Tamanho da imagem 1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
+        print("Tamanho da imagem 2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
         print("------------------------------------\n")
+
+        s = pyttsx3.init()
+        data = "Log de Informações         ",\
+               "Semelhança de imagem = ",pontuacao,\
+               "Número de diferenças encontrados = ",numeroDiferencas,\
+               "Tamanho da imagem 1 = ",imagem1.shape, \
+               "Tamanho da imagem 2 = ", imagem2.shape
+        s.say(data)
+        s.runAndWait()
+
+        s = pyttsx3.init()
+        data = "Deseja visualizar a imagem agora? pressione S para sim ou N para não"
+        s.say(data)
+        s.runAndWait()
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if resposta == "S" or resposta == "s":
@@ -127,6 +161,9 @@ while True:
             # cv2.imshow("imagem1", imagem1)
             # cv2.imshow("imagem2", imagem2)
             cv2.imshow("Diferencas", result)  # diferenças lado a lado
+            plt.hist(result.ravel(), 256, [0, 256]) #adicao do histograma
+            plt.show()
+
             # cv2.imshow("diferenca", diferenca)
             # cv2.imshow("mascara", mascara)
             # cv2.imshow("preenchido imagem2", preenchido_depois)
@@ -137,6 +174,10 @@ while True:
     elif (
             opcao == 2):  ###############################################################################################################################
         print("Finalizando o programa...")
+        s = pyttsx3.init()
+        data = "Você pressionou a opção 2, sair do programa. Até mais!"
+        s.say(data)
+        s.runAndWait()
         cv2.destroyAllWindows()
         sys.exit()
 
