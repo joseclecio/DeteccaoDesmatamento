@@ -5,14 +5,11 @@ import numpy as np
 from skimage.metrics import structural_similarity
 from matplotlib import pyplot as plt
 import pyttsx3
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 # interface para facil manuseio da aplicação
 while True:
-    s = pyttsx3.init()
-    data="Selecione uma Opção",\
-    "Pressione 1 para Escolher Imagem ou 2 para Sair do programa"
-    s.say(data)
-    s.runAndWait()
 
     print("""
 		+--------------------------------------+
@@ -27,6 +24,13 @@ while True:
 
 
 	            """)
+    # modulo responsavel para converter texto em fala e que pode funcionar sem conexão com a internet
+    s = pyttsx3.init()
+    data = "Selecione uma Opção", \
+           "Pressione 1 para Escolher Imagem ou 2 para Sair do programa"
+    s.say(data)
+    s.runAndWait()
+
     opcao = int(input("Digite a opção escolhida: "))
 
     if (
@@ -45,8 +49,8 @@ while True:
         print(" ")
         print("Digite o nome e a extensão da primeira imagem que deseja abrir para sobrepor.")
         print("Exemplo: imagem-1.jpg ")
-        read = input("Nome da imagem: ")
-        imagem1 = cv2.imread(read)
+        Tk().withdraw()
+        imagem1 = cv2.imread(askopenfilename())
 
         s = pyttsx3.init()
         data = "Agora escolha a segunda imagem para ser comparada"
@@ -56,11 +60,7 @@ while True:
         print(" ")
         print("Agora digite o nome e a extensão da imagem a ser sobreposta.")
         print("Exemplo: imagem-2.jpg ")
-        read2 = input("Nome da imagem: ")
-        imagem2 = cv2.imread(read)  # seta tipo de váriavel (a imagem não é utilizada)
-
-        # seleção de imagem a partir da digitação no terminal
-        imagem2 = cv2.imread(read2)
+        imagem2 = cv2.imread(askopenfilename())  # seta tipo de váriavel (a imagem não é utilizada)
 
         # defini aqui para deixar a resolução da imagem padrão ao ser exibida na tela após os processamento
         # independente do tamanho delas, será exibida como padrão 1500x900
@@ -129,19 +129,18 @@ while True:
                 cv2.drawContours(mascara, [c], 0, (0, 255, 0), -1)
                 cv2.drawContours(preenchido_depois, [c], 0, (0, 255, 0), -1)
 
-
         print("\n------------------INFORMAÇÕES------------------")
-        print("Semelhança de imagem", pontuacao)  # impressão no console da semelhança da imagem
-        print("Número de diferenças encontrados = ", numeroDiferencas)  # impressão no console
+        print("Semelhança de imagem aproximada: ", f' {pontuacao:.3f}')  # impressão no console da semelhança da imagem
+        print("Número de diferenças encontrados: ", numeroDiferencas)  # impressão no console
         print("Tamanho da imagem 1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
         print("Tamanho da imagem 2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
         print("------------------------------------\n")
 
         s = pyttsx3.init()
-        data = "Log de Informações         ",\
-               "Semelhança de imagem = ",pontuacao,\
-               "Número de diferenças encontrados = ",numeroDiferencas,\
-               "Tamanho da imagem 1 = ",imagem1.shape, \
+        data = "Log de Informações         ", \
+               "Semelhança de imagem aproximada = ", f' {pontuacao:.3f}', \
+               "Número de diferenças encontrados = ", numeroDiferencas, \
+               "Tamanho da imagem 1 = ", imagem1.shape, \
                "Tamanho da imagem 2 = ", imagem2.shape
         s.say(data)
         s.runAndWait()
@@ -161,7 +160,7 @@ while True:
             # cv2.imshow("imagem1", imagem1)
             # cv2.imshow("imagem2", imagem2)
             cv2.imshow("Diferencas", result)  # diferenças lado a lado
-            plt.hist(result.ravel(), 256, [0, 256]) #adicao do histograma
+            plt.hist(result.ravel(), 256, [0, 256])  # adicao do histograma
             plt.show()
 
             # cv2.imshow("diferenca", diferenca)
