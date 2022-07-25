@@ -3,9 +3,8 @@ import sys
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
-from matplotlib import pyplot as plt
-import pyttsx3
-from tkinter import Tk
+from matplotlib import pyplot as plt #bib. para criacao de grafico
+from tkinter import Tk #bib. para interface grafica
 from tkinter.filedialog import askopenfilename
 
 # interface para facil manuseio da aplicação
@@ -24,22 +23,13 @@ while True:
 
 
 	            """)
-    # modulo responsavel para converter texto em fala e que pode funcionar sem conexão com a internet
-    s = pyttsx3.init()
-    data = "Selecione uma Opção", \
-           "Pressione 1 para Escolher Imagem ou 2 para Sair do programa"
-    s.say(data)
-    s.runAndWait()
 
     opcao = int(input("Digite a opção escolhida: "))
 
     if (
             opcao == 1):  ###############################################################################################################################
 
-        s = pyttsx3.init()
-        data = "Você selecionou a opção 1, escolha a primeira imagem para ser comparada"
-        s.say(data)
-        s.runAndWait()
+
 
         print(" ")
         print("ATENÇÃO: AS IMAGENS DEVEM CONTER O MESMO TAMANHO.")
@@ -49,13 +39,8 @@ while True:
         print(" ")
         print("Digite o nome e a extensão da primeira imagem que deseja abrir para sobrepor.")
         print("Exemplo: imagem-1.jpg ")
-        Tk().withdraw()
-        imagem1 = cv2.imread(askopenfilename())
-
-        s = pyttsx3.init()
-        data = "Agora escolha a segunda imagem para ser comparada"
-        s.say(data)
-        s.runAndWait()
+        Tk().withdraw() #coloquei para ocultar a interface(janela) que aparece no fundo da imagem
+        imagem1 = cv2.imread(askopenfilename()) #função para abrir o windows explore e procurar a imagem a ser selecionada
 
         print(" ")
         print("Agora digite o nome e a extensão da imagem a ser sobreposta.")
@@ -135,20 +120,8 @@ while True:
         print("Tamanho da imagem 1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
         print("Tamanho da imagem 2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
         print("------------------------------------\n")
-
-        s = pyttsx3.init()
-        data = "Log de Informações         ", \
-               "Semelhança de imagem aproximada = ", f' {pontuacao:.3f}', \
-               "Número de diferenças encontrados = ", numeroDiferencas, \
-               "Tamanho da imagem 1 = ", imagem1.shape, \
-               "Tamanho da imagem 2 = ", imagem2.shape
-        s.say(data)
-        s.runAndWait()
-
-        s = pyttsx3.init()
-        data = "Deseja visualizar a imagem agora? pressione S para sim ou N para não"
-        s.say(data)
-        s.runAndWait()
+        plt.hist(diferenca.ravel(), 256, [0, 256])  # adicao do histograma
+        plt.show()
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
         if resposta == "S" or resposta == "s":
@@ -157,10 +130,15 @@ while True:
             result = cv2.resize(result, (2200, 800))  # redimensionamento das imegens
 
             # impressões das janelas
-            # cv2.imshow("imagem1", imagem1)
-            # cv2.imshow("imagem2", imagem2)
-            cv2.imshow("Diferencas", result)  # diferenças lado a lado
-            plt.hist(result.ravel(), 256, [0, 256])  # adicao do histograma
+
+            img = cv2.cvtColor(diferenca, cv2.COLOR_BGR2RGB)
+            canny = cv2.Canny(img, 100, 200)
+
+            plt.imshow(canny, 'gray')
+
+            cv2.imshow("imagem1", imagem1)
+            cv2.imshow("imagem2", imagem2)
+            #cv2.imshow("Diferencas", result)  # diferenças lado a lado
             plt.show()
 
             # cv2.imshow("diferenca", diferenca)
@@ -172,11 +150,7 @@ while True:
 
     elif (
             opcao == 2):  ###############################################################################################################################
-        print("Finalizando o programa...")
-        s = pyttsx3.init()
-        data = "Você pressionou a opção 2, sair do programa. Até mais!"
-        s.say(data)
-        s.runAndWait()
+
         cv2.destroyAllWindows()
         sys.exit()
 
