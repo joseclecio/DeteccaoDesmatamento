@@ -120,7 +120,7 @@ while True:
         print("Tamanho da imagem 1: ", imagem1.shape)  # mostra informações a respeito da dimensão da imagem1
         print("Tamanho da imagem 2: ", imagem2.shape)  # mostra informações a respeito da dimensão da imagem2
         print("------------------------------------\n")
-        plt.hist(diferenca.ravel(), 256, [0, 256])  # adicao do histograma
+        plt.hist(diferenca.ravel())  # adicao do histograma
         plt.show()
 
         resposta = input("Deseja visualizar a imagem agora? [S] [N] : ")
